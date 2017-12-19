@@ -3,14 +3,19 @@ const path = require( 'path' );
 const webpack = require( 'webpack' );
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const config = require( './config' );
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
+
+const dependencies = require('./../package.json').dependencies;
+
+// get vendors from  dependencies
+
+const vendors = Object.keys(dependencies).filter( dependency => ~dependency.indexOf('babel') )
+
 
 
 const publicPath = paths.servedPath;
 const publicUrl = publicPath.slice(0, -1);
-// Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
 module.exports = {
@@ -19,9 +24,7 @@ module.exports = {
             'babel-polyfill',
             paths.appIndexJs
         ],
-        vendor: [
-            'react',
-        ],
+        vendor:vendors
     },
 
     output: {
@@ -73,17 +76,7 @@ module.exports = {
 
     plugins: [
         new InterpolateHtmlPlugin(env.raw),
-        new webpack.DefinePlugin( {
-            'process.env.SERVER_API'         : JSON.stringify( config.SERVER_API ),
-            'process.env.PUBLIC_PATH'        : JSON.stringify( config.publicPath ),
-        } ),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-       // new CopyWebpackPlugin([{ from: 'to-root' }]),
-
-        // new AssetsPlugin({
-        //     filename: 'assets.json',
-        //     path: './tmp',
-        // }),
     ],
 
 };

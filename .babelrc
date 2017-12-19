@@ -14,26 +14,26 @@
     "stage-1",
     "react"
   ],
-  "env": {
-    "prod": {
-      "presets": [
-        [
-          "env",
-          {
-            "targets": {
-              "browsers": [
-                "> 1%",
-                "last 2 versions",
-                "Firefox ESR"
-              ]
-            },
-            "useBuiltIns": true,
-            "modules": false
-          }
-        ]
+      "plugins": [
+        "transform-runtime",
+        "transform-class-properties",
+        "transform-async-to-generator"
       ],
+  "env": {
+    "development": {
       "plugins": [
         "react-hot-loader/babel"
+      ],
+      "presets": [
+        "react-hmre"
+      ]
+    },
+    "production": {
+      "plugins": [
+        "transform-react-constant-elements",
+        "transform-react-inline-elements",
+        "transform-react-pure-class-to-function",
+        "transform-react-remove-prop-types"
       ]
     }
   }

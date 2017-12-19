@@ -1,6 +1,7 @@
 'use strict';
 const path = require('path');
 const autoprefixer = require('autoprefixer');
+const ClosureCompiler = require('google-closure-compiler-js').webpack;
 const merge = require('lodash.mergewith');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -13,6 +14,7 @@ const publicPath = paths.servedPath;
 const shouldUseRelativeAssetPaths = publicPath === './';
 const publicUrl = publicPath.slice(0, -1);
 const cssFilename = 'static/css/[name].[contenthash:8].css';
+const vendorFileName = 'static/js/[chunkhash:15].js';
 
 // ExtractTextPlugin expects the build output to be flat.
 // (See https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/27)
@@ -154,16 +156,24 @@ module.exports = merge({
     },
 
     plugins: [
-        new webpack.optimize.UglifyJsPlugin(),
+        new ClosureCompiler({
+            options: {
+                languageIn: 'ECMASCRIPT6',
+                languageOut: 'ECMASCRIPT5',
+                compilationLevel: 'ADVANCED',
+                warningLevel: 'VERBOSE',
+            },
+        }),
 
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            filename: 'static/js/[chunkhash:15].js',
+            filename:vendorFileName,
+            minChunks: Infinity,
+
         }),
 
         new ExtractTextPlugin({
-            filename: 'static/css/[contenthash:15].css',
-            allChunks: true,
+            filename: cssFilename,
         }),
 
         new webpack.DefinePlugin({
