@@ -75,6 +75,7 @@ module.exports = {
     },
 
     plugins: [
+        new webpack.DefinePlugin(env.stringified),
         new InterpolateHtmlPlugin(env.raw),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ],

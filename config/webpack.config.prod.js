@@ -6,6 +6,7 @@ const merge = require('lodash.mergewith');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const baseConfig = require('./webpack.config.base');
 const mergeCustomizer = require('./utils/merge-customizer');
 const paths = require('./paths');
@@ -156,13 +157,29 @@ module.exports = merge({
     },
 
     plugins: [
-        new ClosureCompiler({
-            options: {
-                languageIn: 'ECMASCRIPT6',
-                languageOut: 'ECMASCRIPT5',
-                compilationLevel: 'ADVANCED',
-                warningLevel: 'VERBOSE',
+         //
+        //
+        // new ClosureCompiler({
+         //     options: {
+         //         compilationLevel: 'ADVANCED',
+         //         warningLevel: 'VERBOSE',
+         //     },
+         // }),
+
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                screw_ie8: true,
+                drop_console: true
             },
+            output: {
+                comments: false
+            },
+            sourceMap: true
+        }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true,
+            debug: false
         }),
 
         new webpack.optimize.CommonsChunkPlugin({
@@ -176,11 +193,6 @@ module.exports = merge({
             filename: cssFilename,
         }),
 
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('production'),
-            },
-        }),
         new HtmlWebpackPlugin({
             inject: true,
             template: paths.appHtml,
