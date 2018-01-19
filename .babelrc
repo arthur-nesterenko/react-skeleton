@@ -1,40 +1,5 @@
 {
   "presets": [
-    ["env", {
-      "modules": false,
-      "targets": {
-        "browsers": [
-          ">1%",
-          "last 3 versions",
-          "Firefox ESR",
-          "not ie <= 9"
-        ]
-      }
-    }],
-    "stage-1",
-    "react"
-  ],
-      "plugins": [
-        "transform-runtime",
-        "transform-class-properties",
-        "transform-async-to-generator"
-      ],
-  "env": {
-    "development": {
-      "plugins": [
-        "react-hot-loader/babel"
-      ],
-      "presets": [
-        "react-hmre"
-      ]
-    },
-    "production": {
-      "plugins": [
-        "transform-react-constant-elements",
-        "transform-react-inline-elements",
-        "transform-react-pure-class-to-function",
-        "transform-react-remove-prop-types"
-      ]
-    }
-  }
+    "react-app"
+  ]
 }
