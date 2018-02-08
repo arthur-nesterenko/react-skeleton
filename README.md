@@ -20,8 +20,8 @@ By default, runs tests related to files changed since the last commit.
 ### Docker
 You can want to use Docker for production.
 For this should use following commands:
-1) build image `docker build . -t react-skeleton`
-2) run container `docker run -p 8080:80 react-skeleton`
+1) build image `docker build . -t react_skeleton`
+2) run container `docker run -p 8080:80 react_skeleton`
 
 ### docker-compose
 ```docker-compose
@@ -29,7 +29,7 @@ version: '2'
  services:
    react_skeleton:
      container_name: react_skeleton
-     build: ./hobover_web_client 
+     build: <folder path to Dockerfile> 
      ports:
        - "8080:80"
   ```
