@@ -13,10 +13,14 @@ RUN  rm -rf build/ && yarn build
 
 # Stage 2 - the production environment
 FROM nginx:1.12-alpine
+RUN mkdir -p /data/www
 
-COPY ./nginx.conf /etc/nginx/nginx.conf
-COPY --from=build-deps /usr/src/app/build /usr/share/nginx/html
+COPY --from=build-deps /usr/src/app/build /data/www
 
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
+VOLUME ["/etc/nginx/conf.d", "/data/www"]
 
-# CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx"]
+EXPOSE 80
