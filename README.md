@@ -27,8 +27,8 @@ For this should use following commands:
 ```docker-compose
 version: '2'
  services:
-   hobover_web_client:
-     container_name: hobover_web_client
+   react_skeleton:
+     container_name: react_skeleton
      build: ./hobover_web_client 
      ports:
        - "80:80"
