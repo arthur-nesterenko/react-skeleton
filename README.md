@@ -17,13 +17,13 @@ It correctly bundles React in production mode and optimizes the build for the be
 Runs the test watcher in an interactive mode.
 By default, runs tests related to files changed since the last commit.
 
-#Docker
+###Docker
 You can want to use Docker for production.
 For this should use following commands:
 1) build image `docker build . -t react-skeleton`
 2) run container `docker build . -t react-skeleton`
 
-#docker-compose
+###docker-compose
 ```docker-compose
 version: '2'
  services:
