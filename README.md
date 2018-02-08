@@ -12,3 +12,42 @@ You will see the build errors and lint warnings in the console.
 ### `npm run build` or `yarn build`
 Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
+
+### `npm test` or `yarn test`
+Runs the test watcher in an interactive mode.
+By default, runs tests related to files changed since the last commit.
+
+#Docker
+You can want to use Docker for production.
+For this should use following commands:
+1) build image `docker build . -t react-skeleton`
+2) run container `docker build . -t react-skeleton`
+
+#docker-compose
+```docker-compose
+version: '2'
+ services:
+   hobover_web_client:
+     container_name: hobover_web_client
+     build: ./hobover_web_client 
+     ports:
+       - "80:80"
+  ```
+  ### `lint-staged`
+  Run linters against staged git files and don't let 💩 slip into your code base!
+  <br>See[lint-staged](https://github.com/okonet/lint-staged)
+  
+  ###Prettier
+  [See](https://github.com/prettier/prettier).
+  This boilerplate include auto formatting code before each `git commit`
+  You can change rules for formatting just edit `.prettierrc`
+  or you can remove this feature remove from `package.json`  
+  ```bash
+ "lint-staged": {
+    "*.{js,jsx}": [
+      "prettier --config .prettierrc --write",
+      "git add"
+    ]
+  },
+```
+
