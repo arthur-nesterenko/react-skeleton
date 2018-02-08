@@ -21,7 +21,7 @@ By default, runs tests related to files changed since the last commit.
 You can want to use Docker for production.
 For this should use following commands:
 1) build image `docker build . -t react-skeleton`
-2) run container `docker build . -t react-skeleton`
+2) run container `docker run -p 8080:80 react-skeleton`
 
 ### docker-compose
 ```docker-compose
@@ -31,7 +31,7 @@ version: '2'
      container_name: react_skeleton
      build: ./hobover_web_client 
      ports:
-       - "80:80"
+       - "8080:80"
   ```
   ### `lint-staged`
   Run linters against staged git files and don't let 💩 slip into your code base!
