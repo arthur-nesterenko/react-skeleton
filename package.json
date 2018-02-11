@@ -52,7 +52,6 @@
     "lint-staged": "^6.1.0",
     "lodash.mergewith": "^4.6.0",
     "node-sass": "^4.7.2",
-    "npm": "^5.6.0",
     "postcss-csso": "^3.0.0",
     "postcss-flexbugs-fixes": "^3.2.0",
     "postcss-loader": "^2.0.9",
